@@ -1,13 +1,13 @@
-import fs from 'fs/promises';
-import { string } from 'yargs';
+import fs from "fs/promises";
+import { string } from "yargs";
 
 export default class Configuration {
-  private _path: string = '';
+  private _path = "";
   _config = {
-    url: '',
+    url: "",
   };
 
-  async loadConfig(path: string) {
+  async loadConfig(path: string): Promise<void> {
     const contents = await fs.readFile(path);
     const configObject = JSON.parse(contents.toString());
 
@@ -23,6 +23,6 @@ export default class Configuration {
   get url(): string {
     console.log(this._config);
 
-    return this._config['url'];
+    return this._config["url"];
   }
 }
