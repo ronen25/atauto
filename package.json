@@ -18,6 +18,9 @@
   "homepage": "https://github.com/ronen25/atauto#readme",
   "devDependencies": {
     "@types/yargs": "^17.0.2",
+    "@typescript-eslint/eslint-plugin": "^4.29.3",
+    "@typescript-eslint/parser": "^4.29.3",
+    "eslint": "^7.32.0",
     "typescript": "^4.3.5"
   },
   "dependencies": {
