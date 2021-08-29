@@ -1,11 +1,11 @@
-import chalk from 'chalk';
+import chalk from "chalk";
 
-const logError = (message?: any): void => {
+const error = (message?: unknown): void => {
   console.error(chalk.bold.red(message));
 };
 
-const logSuccess = (message?: any): void => {
+const success = (message?: unknown): void => {
   console.log(chalk.green(message));
 };
 
-export { logError, logSuccess };
+export { error, success };
