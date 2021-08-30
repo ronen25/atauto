@@ -1,15 +1,16 @@
-import process from "process";
+import process from 'process';
 
-import yargs from "yargs";
+import yargs from 'yargs';
 
-import Configuration from "./config";
-import * as Log from "./log";
+import Configuration from './config';
+import AttendanceAutomator from 'automation';
+import * as Log from './log';
 
 const main = async () => {
   const options = yargs(process.argv.slice(2))
     .option({
-      a: { type: "string", demandOption: true, alias: "action" },
-      c: { type: "string", alias: "config", default: "./atauto.conf" },
+      a: { type: 'string', demandOption: true, alias: 'action' },
+      c: { type: 'string', alias: 'config', default: './atauto.conf' },
     })
     .parseSync();
 
@@ -23,12 +24,13 @@ const main = async () => {
     return;
   }
 
-  // Check action
-  if (options.a === "clockin") {
-    console.log("Clocking in...");
-  } else if (options.a === "clockout") {
-    console.log("Clocking out...");
-  }
+  const attSystem = new AttendanceAutomator(config);
+  await attSystem.init();
+
+  // Depending on action clock in or out
+  await attSystem.startActions(options.a);
+
+  await attSystem.deinit();
 };
 
 main();
