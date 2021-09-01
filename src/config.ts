@@ -1,10 +1,9 @@
-import fs from "fs/promises";
-import { string } from "yargs";
+import fs from 'fs/promises';
 
 export default class Configuration {
-  private _path = "";
+  private _path = '';
   _config = {
-    url: "",
+    url: '',
   };
 
   async loadConfig(path: string): Promise<void> {
@@ -21,8 +20,6 @@ export default class Configuration {
   }
 
   get url(): string {
-    console.log(this._config);
-
-    return this._config["url"];
+    return this._config['url'];
   }
 }
