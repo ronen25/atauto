@@ -1,5 +1,14 @@
-abstract class Action {
-  abstract get name(): string;
-}
+import puppeteer from 'puppeteer';
 
-export default Action;
+import Configuration from 'config';
+
+export default abstract class Action {
+  abstract get actionName(): string;
+
+  async performAction(_1: puppeteer.Page, _2: Configuration): Promise<void> {
+    // Default implementation
+    console.log(`Default performAction() called for action ${this.actionName}`);
+
+    return;
+  }
+}

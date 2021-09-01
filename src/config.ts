@@ -2,9 +2,7 @@ import fs from 'fs/promises';
 
 export default class Configuration {
   private _path = '';
-  _config = {
-    url: '',
-  };
+  private _config = new Map<string, string>();
 
   async loadConfig(path: string): Promise<void> {
     const contents = await fs.readFile(path);
@@ -19,7 +17,11 @@ export default class Configuration {
     return this._path;
   }
 
-  get url(): string {
-    return this._config['url'];
+  get(propertyName: string): string {
+    if (!this._config.has(propertyName)) {
+      throw new Error(`Property '${propertyName} does not exist in config`);
+    }
+
+    return this._config.get(propertyName) ?? '';
   }
 }

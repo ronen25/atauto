@@ -28,7 +28,12 @@ const main = async () => {
   await attSystem.init();
 
   // Depending on action clock in or out
-  await attSystem.startActions(options.a);
+  if (options.a === 'clockin') {
+    await attSystem.addActions(...AttendanceAutomator.ClockinActionsList);
+  } else if (options.a === 'clockout') {
+    await attSystem.addActions(...AttendanceAutomator.ClockoutActionsList);
+  }
+  await attSystem.executeActions();
 
   await attSystem.deinit();
 };
