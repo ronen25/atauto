@@ -10,7 +10,9 @@ export default class Configuration {
 
     // Store the object in the config map
     this._path = path;
-    this._config = configObject;
+    for (const [key, value] of Object.entries(configObject)) {
+      this._config.set(key, value as string);
+    }
   }
 
   get path(): string {

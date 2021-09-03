@@ -3,7 +3,7 @@ import process from 'process';
 import yargs from 'yargs';
 
 import Configuration from './config';
-import AttendanceAutomator from 'automation';
+import AttendanceAutomator from './automation';
 import * as Log from './log';
 
 const main = async () => {
@@ -11,6 +11,7 @@ const main = async () => {
     .option({
       a: { type: 'string', demandOption: true, alias: 'action' },
       c: { type: 'string', alias: 'config', default: './atauto.conf' },
+      d: { type: 'boolean', alias: 'debug', default: false },
     })
     .parseSync();
 
@@ -24,7 +25,7 @@ const main = async () => {
     return;
   }
 
-  const attSystem = new AttendanceAutomator(config);
+  const attSystem = new AttendanceAutomator(config, options.d);
   await attSystem.init();
 
   // Depending on action clock in or out
@@ -33,8 +34,9 @@ const main = async () => {
   } else if (options.a === 'clockout') {
     await attSystem.addActions(...AttendanceAutomator.ClockoutActionsList);
   }
-  await attSystem.executeActions();
 
+  // Execute and, when done, destroy the puppeteer'd Chrome
+  await attSystem.executeActions();
   await attSystem.deinit();
 };
 

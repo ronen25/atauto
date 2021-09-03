@@ -9,10 +9,12 @@ class LoginAction extends Action {
   }
 
   async performAction(page: puppeteer.Page, config: Configuration): Promise<void> {
-    const USERNAME_SELECTOR = '#email';
-    const PASSWORD_SELECTOR = '#password';
+    const USERNAME_SELECTOR = 'input[name="email"]';
+    const PASSWORD_SELECTOR = 'input[name="password"]';
 
-    await page.goto(config.get('url'));
+    const url = config.get('url');
+    await page.goto(url);
+    await page.waitForSelector('input[name="email"]');
 
     // Input username
     await page.click(USERNAME_SELECTOR);

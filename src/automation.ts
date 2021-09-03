@@ -1,17 +1,19 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+
 import puppeteer from 'puppeteer';
 
-import Configuration from 'config';
-import Action from 'actions/action';
-import LoginAction from 'actions/loginAction';
+import Configuration from './config';
+import Action from './actions/action';
+import LoginAction from './actions/loginAction';
 
 export default class AttendanceAutomator {
   private _debug = false;
-  private _browser: puppeteer.Browser | null = null;
-  private _page: puppeteer.Page | null = null;
+  private _browser?: puppeteer.Browser;
+  private _page?: puppeteer.Page;
   private _config: Configuration;
   private _actions: Action[] = [];
 
-  constructor(config: Configuration, debug = false) {
+  constructor(config: Configuration, debug: boolean) {
     this._debug = debug;
     this._config = config;
   }
@@ -22,7 +24,7 @@ export default class AttendanceAutomator {
   }
 
   async deinit(): Promise<void> {
-    this._browser?.close();
+    this._browser!.close();
   }
 
   async addActions<T extends Action>(...actions: T[]): Promise<void> {
@@ -30,7 +32,10 @@ export default class AttendanceAutomator {
   }
 
   async executeActions(): Promise<void> {
-    return; // TODO
+    for (const action of this._actions) {
+      console.log(`Executing action: ${action.actionName}`);
+      await action.performAction(this._page!, this._config);
+    }
   }
 
   // Static list getters
