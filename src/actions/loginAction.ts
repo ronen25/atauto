@@ -12,8 +12,7 @@ class LoginAction extends Action {
     const USERNAME_SELECTOR = 'input[name="email"]';
     const PASSWORD_SELECTOR = 'input[name="password"]';
 
-    const url = config.get('url');
-    await page.goto(url);
+    await page.goto(config.get('url'));
     await page.waitForSelector('input[name="email"]');
 
     // Input username
@@ -26,7 +25,6 @@ class LoginAction extends Action {
 
     const LOGIN_BUTTON_SELECTOR = '#image1';
     await page.click(LOGIN_BUTTON_SELECTOR);
-    await page.waitForNavigation();
   }
 }
 

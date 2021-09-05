@@ -38,6 +38,8 @@ const main = async () => {
   // Execute and, when done, destroy the puppeteer'd Chrome
   await attSystem.executeActions();
   await attSystem.deinit();
+
+  console.log('Done.');
 };
 
 main();

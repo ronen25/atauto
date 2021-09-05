@@ -5,6 +5,7 @@ import puppeteer from 'puppeteer';
 import Configuration from './config';
 import Action from './actions/action';
 import LoginAction from './actions/loginAction';
+import WorkTypeSelectionAction from './actions/workTypeSelection';
 
 export default class AttendanceAutomator {
   private _debug = false;
@@ -13,13 +14,18 @@ export default class AttendanceAutomator {
   private _config: Configuration;
   private _actions: Action[] = [];
 
+  DEBUG_DELAY = 50;
+
   constructor(config: Configuration, debug: boolean) {
     this._debug = debug;
     this._config = config;
   }
 
   async init(): Promise<void> {
-    this._browser = await puppeteer.launch({ headless: !this._debug });
+    this._browser = await puppeteer.launch({
+      headless: !this._debug,
+      slowMo: this._debug ? this.DEBUG_DELAY : 0,
+    });
     this._page = await this._browser.newPage();
   }
 
@@ -32,6 +38,8 @@ export default class AttendanceAutomator {
   }
 
   async executeActions(): Promise<void> {
+    console.log(`Will execute ${this._actions.length} actions.`);
+
     for (const action of this._actions) {
       console.log(`Executing action: ${action.actionName}`);
       await action.performAction(this._page!, this._config);
@@ -40,10 +48,10 @@ export default class AttendanceAutomator {
 
   // Static list getters
   static get ClockinActionsList(): Action[] {
-    return [new LoginAction()];
+    return [new LoginAction(), new WorkTypeSelectionAction()];
   }
 
   static get ClockoutActionsList(): Action[] {
-    return [new LoginAction()];
+    return [new LoginAction(), new WorkTypeSelectionAction()];
   }
 }
