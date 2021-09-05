@@ -1,1 +1,3 @@
-export type ClockType = 'clockin' | 'clockout';
+type ClockType = 'clockin' | 'clockout';
+
+export default ClockType;

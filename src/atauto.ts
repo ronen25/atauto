@@ -39,7 +39,7 @@ const main = async () => {
   await attSystem.executeActions();
   await attSystem.deinit();
 
-  console.log('Done.');
+  Log.success('Done.');
 };
 
 main();

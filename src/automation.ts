@@ -6,6 +6,8 @@ import Configuration from './config';
 import Action from './actions/action';
 import LoginAction from './actions/loginAction';
 import WorkTypeSelectionAction from './actions/workTypeSelection';
+import FillDatesAction from './actions/fillDates';
+import * as Log from './log';
 
 export default class AttendanceAutomator {
   private _debug = false;
@@ -38,20 +40,28 @@ export default class AttendanceAutomator {
   }
 
   async executeActions(): Promise<void> {
-    console.log(`Will execute ${this._actions.length} actions.`);
+    Log.info(`Will execute ${this._actions.length} actions.`);
 
     for (const action of this._actions) {
-      console.log(`Executing action: ${action.actionName}`);
+      Log.info(`Executing action: ${action.actionName}`);
       await action.performAction(this._page!, this._config);
     }
   }
 
   // Static list getters
   static get ClockinActionsList(): Action[] {
-    return [new LoginAction(), new WorkTypeSelectionAction()];
+    return [
+      new LoginAction(),
+      new WorkTypeSelectionAction(),
+      new FillDatesAction('clockin'),
+    ];
   }
 
   static get ClockoutActionsList(): Action[] {
-    return [new LoginAction(), new WorkTypeSelectionAction()];
+    return [
+      new LoginAction(),
+      new WorkTypeSelectionAction(),
+      new FillDatesAction('clockout'),
+    ];
   }
 }

@@ -8,9 +8,9 @@ class WorkTypeSelectionAction extends Action {
     return 'WorkTypeSelectionAction';
   }
 
-  async performAction(page: puppeteer.Page, config: Configuration): Promise<void> {
+  async performAction(page: puppeteer.Page, _: Configuration): Promise<void> {
     const WORK_TYPE_SELECTOR = '#fstjid_1';
-    const WORK_SECONDARY_TYPE_SELECTOR = 'select[name="jid_1"]';
+    const WORK_SECONDARY_TYPE_SELECTOR = '#jid_1';
 
     await page.waitForSelector(WORK_TYPE_SELECTOR);
 
