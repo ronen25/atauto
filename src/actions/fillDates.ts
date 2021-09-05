@@ -21,6 +21,7 @@ class FillDatesAction extends Action {
     const START_MM = '#time_start_MM_1';
     const END_HH = '#time_end_HH_1';
     const END_MM = '#time_end_MM_1';
+    const SAVE_BUTTON = '#save_btn';
 
     type InputSelectors = { hh: string; mm: string };
 
@@ -44,6 +45,8 @@ class FillDatesAction extends Action {
 
     await page.focus(selectors.mm);
     await page.keyboard.type(timeMinutes);
+
+    await page.click(SAVE_BUTTON);
   }
 }
 
