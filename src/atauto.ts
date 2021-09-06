@@ -1,11 +1,11 @@
 import process from 'process';
 
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, dialog } from 'electron';
 import Configuration from './config';
 import AttendanceAutomator from './automation';
-import * as Log from './log';
 import RendererClickEventArgs from 'rendererClickEventArgs';
 import ClockType from 'clocktype';
+import * as Log from './log';
 
 const createWindow = (): void => {
   const window = new BrowserWindow({
@@ -28,6 +28,11 @@ app.whenReady().then(() => {
 // Mac-specific stuff
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') app.quit();
+});
+
+ipcMain.on('ui-error', (_: Electron.IpcMainEvent, args: string[]) => {
+  const [title, message] = args;
+  dialog.showErrorBox(title, message);
 });
 
 ipcMain.on('clock', async (_: Electron.IpcMainEvent, arg: RendererClickEventArgs) => {

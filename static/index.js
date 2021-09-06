@@ -24,7 +24,11 @@ const onBodyLoad = () => {
     const clockDiv = document.getElementById('clock');
 
     const date = new Date();
-    const hours = date.getHours();
+    let hours = date.getHours();
+    if (hours < 10) {
+      hours = '0' + hours;
+    }
+
     let minutes = date.getMinutes();
     if (minutes < 10) {
       minutes = '0' + minutes;
@@ -67,6 +71,15 @@ const onClockButtonClicked = () => {
   const url = document.getElementById('url').value;
   const username = document.getElementById('username').value;
   const password = document.getElementById('password').value;
+
+  // Check all values are in place
+  if (!url || !username || !password) {
+    ipcRenderer.send('ui-error', [
+      'Input error',
+      'URL, username and/or password are empty or missing.',
+    ]);
+    return;
+  }
 
   // Store url and username to local storage
   localStorage.setItem('url', url);
