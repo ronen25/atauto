@@ -16,7 +16,7 @@ class FillDatesAction extends Action {
     return 'Fill dates';
   }
 
-  async performAction(page: puppeteer.Page, _: Configuration): Promise<void> {
+  async performAction(page: puppeteer.Page, config: Configuration): Promise<void> {
     const START_HH = '#time_start_HH_1';
     const START_MM = '#time_start_MM_1';
     const END_HH = '#time_end_HH_1';
@@ -35,16 +35,12 @@ class FillDatesAction extends Action {
     }
 
     // Fill current date and time string
-    const currentTime = new Date();
-    const timeHours = currentTime.getHours().toString();
-    const timeMinutes = currentTime.getMinutes().toString();
-
     await page.waitForSelector(selectors.hh);
     await page.focus(selectors.hh);
-    await page.keyboard.type(timeHours);
+    await page.keyboard.type(config.hours);
 
     await page.focus(selectors.mm);
-    await page.keyboard.type(timeMinutes);
+    await page.keyboard.type(config.minutes);
 
     await page.click(SAVE_BUTTON);
   }

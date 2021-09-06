@@ -1,4 +1,7 @@
+const { ipcRenderer } = require('electron');
+
 let clockUpdater;
+let clockType;
 
 const setButtonText = (text) => {
   const button = document.getElementById('btnClock');
@@ -6,6 +9,8 @@ const setButtonText = (text) => {
 };
 
 const onClockTypeChanged = (type) => {
+  clockType = type;
+
   if (type === 'clockin') {
     setButtonText('Clock In');
   } else {
@@ -34,11 +39,13 @@ const onBodyLoad = () => {
   if (new Date().getHours() >= 17) {
     const radClockOut = document.getElementById('radClockOut');
     radClockOut.checked = true;
+    clockType = 'clockout';
 
     setButtonText('Clock Out');
   } else {
     const radClockIn = document.getElementById('radClockIn');
     radClockIn.checked = true;
+    clockType = 'clockin';
 
     setButtonText('Clock In');
   }
@@ -46,4 +53,20 @@ const onBodyLoad = () => {
 
 const onBodyUnload = (event) => {
   clearInterval(clockUpdater);
+};
+
+const onClockButtonClicked = () => {
+  const [hours, minutes] = document.getElementById('clock').textContent.split(':');
+
+  // Send message to main process
+  ipcRenderer.send('clock', {
+    clockType,
+    config: {
+      url: document.getElementById('url').value,
+      username: document.getElementById('username').value,
+      password: document.getElementById('password').value,
+      hours,
+      minutes,
+    },
+  });
 };
