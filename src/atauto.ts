@@ -7,8 +7,8 @@ import * as Log from './log';
 
 const createWindow = (): void => {
   const window = new BrowserWindow({
-    width: 450,
-    height: 600,
+    width: 550,
+    height: 800,
     autoHideMenuBar: true,
   });
 

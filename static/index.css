@@ -1,3 +1,9 @@
+:root {
+  background-color: white;
+  --clock-color: white;
+  --clock-background-color: darkgreen;
+}
+
 * {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -13,22 +19,48 @@ h2 {
 #container {
   display: grid;
   gap: 10px;
+  grid-template-rows: 1fr 2fr 1fr auto 1fr;
 }
 
 .configuration-card {
   border-style: solid;
   border-width: 1px;
   border-radius: 4px;
-  padding-bottom: 5px;
-  margin: 0 2em 0 2em;
+  padding-bottom: 10px;
+  margin: 0 1em 0 1em;
 }
 
 #config {
   display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+  padding: 0 10px 0 10px;
 }
 
 #config > input {
   font-family: monospace;
+}
+
+#config-title {
+  grid-row: 1;
+  grid-column-start: 1;
+  grid-column-end: span 2;
+}
+
+#url-label {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+#url {
+  grid-row: 2;
+  grid-column: 2;
+}
+
+#clocktype-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #clock {
@@ -36,8 +68,8 @@ h2 {
   font-weight: bold;
   font-family: monospace;
   text-align: center;
-  background-color: darkgreen;
-  color: white;
+  background-color: var(--clock-background-color);
+  color: var(--clock-color);
   border-radius: 10px;
   margin: 0 1em 0 1em;
 }
@@ -45,4 +77,12 @@ h2 {
 #btnClock {
   font-size: 3em;
   margin: 0 3em 0 3em;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: #181818;
+    color: whitesmoke;
+    --clock-background-color: gray;
+  }
 }
