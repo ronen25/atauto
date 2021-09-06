@@ -49,6 +49,13 @@ const onBodyLoad = () => {
 
     setButtonText('Clock In');
   }
+
+  // If local storage data exists, put it
+  const localUrl = localStorage.getItem('url') ?? '';
+  const localUsername = localStorage.getItem('username') ?? '';
+
+  document.getElementById('url').value = localUrl;
+  document.getElementById('username').value = localUsername;
 };
 
 const onBodyUnload = (event) => {
@@ -57,14 +64,21 @@ const onBodyUnload = (event) => {
 
 const onClockButtonClicked = () => {
   const [hours, minutes] = document.getElementById('clock').textContent.split(':');
+  const url = document.getElementById('url').value;
+  const username = document.getElementById('username').value;
+  const password = document.getElementById('password').value;
+
+  // Store url and username to local storage
+  localStorage.setItem('url', url);
+  localStorage.setItem('username', username);
 
   // Send message to main process
   ipcRenderer.send('clock', {
     clockType,
     config: {
-      url: document.getElementById('url').value,
-      username: document.getElementById('username').value,
-      password: document.getElementById('password').value,
+      url,
+      username,
+      password,
       hours,
       minutes,
     },

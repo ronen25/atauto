@@ -35,6 +35,7 @@ ipcMain.on('clock', async (_: Electron.IpcMainEvent, arg: RendererClickEventArgs
   const { clockType, config, timeString } = arg;
 
   // Initializs the automator with the config
+  /*
   const attSystem = new AttendanceAutomator(config, true);
   await attSystem.init();
 
@@ -51,6 +52,7 @@ ipcMain.on('clock', async (_: Electron.IpcMainEvent, arg: RendererClickEventArgs
   // Execute and, when done, destroy the puppeteer'd Chrome
   await attSystem.executeActions();
   await attSystem.deinit();
+  */
 });
 
 /*
