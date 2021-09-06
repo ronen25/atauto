@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="index.js"></script>
+
+    <title>Atauto</title>
+  </head>
+  <body onload="onBodyLoad();" onunload="onBodyUnload();">
+    <div id="container">
+      <h1>Attendance Automation (atauto)</h1>
+
+      <div id="config">
+        <h2>Configuration</h2>
+
+        <!-- URL  -->
+        <label for="url">URL:</label>
+        <input type="text" id="url" name="url" />
+
+        <!-- Username -->
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+
+        <!-- Password -->
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="url" />
+      </div>
+
+      <div id="clocktype">
+        <h2>Clock Type</h2>
+
+        <input type="radio" name="clocktype" id="radClockIn" onchange="onClockTypeChanged('clockin');">Clock In</input>
+        <input type="radio" name="clocktype" id="radClockOut" onchange="onClockTypeChanged('clockout');">Clock Out</input>
+      </div>
+
+      <div id="clock"></div>
+
+      <button id="btnClock"></button>
+    </div>
+  </body>
+</html>

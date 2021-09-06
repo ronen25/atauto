@@ -1,20 +1,31 @@
 import process from 'process';
 
-import yargs from 'yargs';
-
+import { app, BrowserWindow } from 'electron';
 import Configuration from './config';
 import AttendanceAutomator from './automation';
 import * as Log from './log';
 
-const main = async () => {
-  const options = yargs(process.argv.slice(2))
-    .option({
-      a: { type: 'string', demandOption: true, alias: 'action' },
-      c: { type: 'string', alias: 'config', default: './atauto.conf' },
-      d: { type: 'boolean', alias: 'debug', default: false },
-    })
-    .parseSync();
+const createWindow = (): void => {
+  const window = new BrowserWindow({
+    width: 450,
+    height: 600,
+    autoHideMenuBar: true,
+  });
 
+  window.loadFile('static/index.html');
+};
+
+app.whenReady().then(() => {
+  createWindow();
+});
+
+// Mac-specific stuff
+app.on('window-all-closed', () => {
+  if (process.platform !== 'darwin') app.quit();
+});
+
+/*
+const main = async () => {
   // Load configuration
   const config = new Configuration();
   try {
@@ -43,3 +54,4 @@ const main = async () => {
 };
 
 main();
+*/
