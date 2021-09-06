@@ -7,8 +7,10 @@ import RendererClickEventArgs from 'rendererClickEventArgs';
 import ClockType from 'clocktype';
 import * as Log from './log';
 
+let window: BrowserWindow;
+
 const createWindow = (): void => {
-  const window = new BrowserWindow({
+  window = new BrowserWindow({
     width: 550,
     height: 800,
     autoHideMenuBar: true,
@@ -37,10 +39,9 @@ ipcMain.on('ui-error', (_: Electron.IpcMainEvent, args: string[]) => {
 
 ipcMain.on('clock', async (_: Electron.IpcMainEvent, arg: RendererClickEventArgs) => {
   // Destructure the argument
-  const { clockType, config, timeString } = arg;
+  const { clockType, config } = arg;
 
   // Initializs the automator with the config
-  /*
   const attSystem = new AttendanceAutomator(config, true);
   await attSystem.init();
 
@@ -57,24 +58,11 @@ ipcMain.on('clock', async (_: Electron.IpcMainEvent, arg: RendererClickEventArgs
   // Execute and, when done, destroy the puppeteer'd Chrome
   await attSystem.executeActions();
   await attSystem.deinit();
-  */
+
+  // Log done
+  dialog.showMessageBox(window, {
+    message: 'Clocking is completed successfully.',
+    type: 'info',
+    title: 'Success',
+  });
 });
-
-/*
-const main = async () => {
-  // Load configuration
-  const config = new Configuration();
-  try {
-    await config.loadConfig(options.c);
-    Log.success(`Loaded config file ${options.c}`);
-  } catch (error) {
-    Log.error(`${error.message}`);
-    return;
-  }
-
-  const attSystem = new AttendanceAutomator(config, options.d);
-  await attSystem.init();
-};
-
-main();
-*/
