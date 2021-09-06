@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <script src="index.js"></script>
+    <link rel="stylesheet" href="index.css">
 
     <title>Atauto</title>
   </head>
@@ -13,7 +14,7 @@
     <div id="container">
       <h1>Attendance Automation (atauto)</h1>
 
-      <div id="config">
+      <div id="config" class="configuration-card">
         <h2>Configuration</h2>
 
         <!-- URL  -->
@@ -29,11 +30,13 @@
         <input type="text" id="password" name="url" />
       </div>
 
-      <div id="clocktype">
+      <div id="clocktype" class="configuration-card">
         <h2>Clock Type</h2>
 
-        <input type="radio" name="clocktype" id="radClockIn" onchange="onClockTypeChanged('clockin');">Clock In</input>
-        <input type="radio" name="clocktype" id="radClockOut" onchange="onClockTypeChanged('clockout');">Clock Out</input>
+        <div id="clocktype-buttons">
+          <input type="radio" name="clocktype" id="radClockIn" onchange="onClockTypeChanged('clockin');">Clock In</input>
+          <input type="radio" name="clocktype" id="radClockOut" onchange="onClockTypeChanged('clockout');">Clock Out</input>
+        </div>
       </div>
 
       <div id="clock"></div>

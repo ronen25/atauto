@@ -19,7 +19,13 @@ const onBodyLoad = () => {
     const clockDiv = document.getElementById('clock');
 
     const date = new Date();
-    const timeString = `${date.getHours()}:${date.getMinutes()}`;
+    const hours = date.getHours();
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+      minutes = '0' + minutes;
+    }
+
+    const timeString = `${hours}:${minutes}`;
 
     clockDiv.textContent = timeString;
   }, 1000);
