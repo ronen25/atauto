@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 
-import Action from './action';
+import Action from './Action';
 import Configuration from 'config';
 
 class LoginAction extends Action {

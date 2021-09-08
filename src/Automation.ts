@@ -3,10 +3,10 @@
 import puppeteer from 'puppeteer';
 
 import Configuration from './config';
-import Action from './actions/action';
-import LoginAction from './actions/loginAction';
-import WorkTypeSelectionAction from './actions/workTypeSelection';
-import FillDatesAction from './actions/fillDates';
+import Action from './actions/Action';
+import LoginAction from './actions/LoginAction';
+import WorkTypeSelectionAction from './actions/WorkTypeSelection';
+import FillDatesAction from './actions/FillDates';
 
 export default class AttendanceAutomator {
   private _debug = false;
