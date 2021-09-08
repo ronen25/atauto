@@ -1,7 +1,8 @@
 {
   "name": "atauto",
   "version": "1.0.0",
-  "description": "",
+  "authors": "Ronen",
+  "description": "Attendance automation program",
   "main": "build/atauto.js",
   "scripts": {
     "start": "electron-forge start",
@@ -13,7 +14,6 @@
     "type": "git",
     "url": "git+https://github.com/ronen25/atauto.git"
   },
-  "author": "",
   "license": "UNLICENSED",
   "bugs": {
     "url": "https://github.com/ronen25/atauto/issues"
@@ -50,10 +50,7 @@
           }
         },
         {
-          "name": "@electron-forge/maker-zip",
-          "platforms": [
-            "darwin"
-          ]
+          "name": "@electron-forge/maker-zip"
         },
         {
           "name": "@electron-forge/maker-deb",
