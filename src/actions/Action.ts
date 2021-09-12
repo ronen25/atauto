@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 
-import Configuration from 'config';
+import Configuration from '../Config';
 
 export default abstract class Action {
   abstract get actionName(): string;

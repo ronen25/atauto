@@ -2,7 +2,7 @@
 
 import puppeteer from 'puppeteer';
 
-import Configuration from './config';
+import Configuration from './Config';
 import Action from './actions/Action';
 import LoginAction from './actions/LoginAction';
 import WorkTypeSelectionAction from './actions/WorkTypeSelection';

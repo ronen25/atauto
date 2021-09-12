@@ -1,5 +1,5 @@
-import ClockType from './clocktype';
-import Configuration from './config';
+import ClockType from './Clocktype';
+import Configuration from './Config';
 
 interface RendererClickEventArgs {
   config: Configuration;

@@ -1,8 +1,8 @@
 import puppeteer from 'puppeteer';
 
 import Action from './Action';
-import Configuration from 'config';
-import ClockType from '../clocktype';
+import Configuration from 'Config';
+import ClockType from '../Clocktype';
 
 class FillDatesAction extends Action {
   private _clockType: ClockType;

@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 
 import Action from './Action';
-import Configuration from 'config';
+import Configuration from '../Config';
 
 class LoginAction extends Action {
   get actionName(): string {

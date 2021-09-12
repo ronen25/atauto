@@ -1,9 +1,9 @@
 import process from 'process';
 
 import { app, BrowserWindow, ipcMain, dialog } from 'electron';
-import AttendanceAutomator from './automation';
-import RendererClickEventArgs from 'rendererClickEventArgs';
-import ClockType from 'clocktype';
+import AttendanceAutomator from './Automation';
+import RendererClickEventArgs from 'RendererClickEventArgs';
+import ClockType from 'Clocktype';
 
 let window: BrowserWindow;
 
