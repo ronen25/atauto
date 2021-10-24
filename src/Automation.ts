@@ -7,6 +7,7 @@ import Action from './actions/Action';
 import LoginAction from './actions/LoginAction';
 import WorkTypeSelectionAction from './actions/WorkTypeSelection';
 import FillDatesAction from './actions/FillDates';
+import ClockType from 'Clocktype';
 
 export default class AttendanceAutomator {
   private _debug = false;
@@ -38,9 +39,9 @@ export default class AttendanceAutomator {
     this._actions = this._actions.concat(actions);
   }
 
-  async executeActions(): Promise<void> {
+  async executeActions(clockType: ClockType): Promise<void> {
     for (const action of this._actions) {
-      await action.performAction(this._page!, this._config);
+      await action.performAction(this._page!, this._config, clockType);
     }
   }
 

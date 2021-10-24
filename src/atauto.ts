@@ -54,7 +54,7 @@ ipcMain.on('clock', async (_: Electron.IpcMainEvent, arg: RendererClickEventArgs
   }
 
   // Execute and, when done, destroy the puppeteer'd Chrome
-  await attSystem.executeActions();
+  await attSystem.executeActions(clockType);
   await attSystem.deinit();
 
   // Log done
